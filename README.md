@@ -1,3 +1,7 @@
+# otbm render
+
+A project to render a Remeres map in the browser
+
 - Reads a .otbm file (Remeres map)
 - Write to JSON using otbm2json
 - Uses open-tibia-library to read .dat and .spr files
