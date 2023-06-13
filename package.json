@@ -3,10 +3,8 @@
   "version": "0.1.6",
   "description": "OpenTibiaLibrary",
   "scripts": {
-    "build-render": "esbuild otbmrender.ts --bundle --outfile=js/index.js --platform=browser",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.config.js",
-    "watch": "webpack --config webpack.config.js --watch"
+    "dev": "serve public -p 4000 --cors",
+    "build": "ts-node otbm2json.ts && esbuild otbmrender.ts --bundle --outfile=public/dist/index.js --platform=browser"
   },
   "author": "Gesior.pl (Jerzy Skalski)",
   "license": "MIT",
@@ -32,6 +30,8 @@
   "dependencies": {
     "gif.js": "^0.2.0",
     "jszip": "^3.2.2",
-    "pixi.js": "^7.2.4"
+    "otbm2json": "^0.2.0",
+    "pixi.js": "^7.2.4",
+    "serve": "^14.2.0"
   }
 }
