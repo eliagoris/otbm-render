@@ -1,21 +1,9 @@
-# Open Tibia Library
+# otbm render
 
-Library to manipulate files used by OTS and OTClient. Written in TypeScript.
+A project to render a Remeres map in the browser
 
-Base for OT Item Editor and Map Editor.
-
-**How to run example (item image generator)?**
-1. Google 'install nodejs' and follow instruction for installation with system integration.
-   
-   It will install `node` and `npm` in your system.
-2. Open folder with OpenTibiaLibrary in terminal (cmd).
-3. Type:
-    ```
-    npm install
-    ```
-4. Type:
-    ```
-    npm run-script build
-    ```
-5. After build there will appear folder `js`.
-6. Open `itemImageGenerator.html` in webbrowser (tested on Chrome). Done.
+- Reads a `.otbm` file (Remeres map) in JSON format using otbm2json
+- Writes to a JSON file (this can be skipped, use only JSON variables later) - TODO
+- Uses open-tibia-library to read the `.dat` and `.spr` files
+- Load the proper sprite from the `.spr` file for each map item
+- Renders the map using pixi.js
