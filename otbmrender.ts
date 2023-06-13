@@ -124,7 +124,7 @@ async function testLoadFromUrlsAndDrawImage() {
     } else if (direction === "bottom") {
       dy = 1
       spriteToUpdate = bottom1.sprite
-    } else if (direction === "left") {
+    } else {
       dx = -1
       spriteToUpdate = left1.sprite
     }

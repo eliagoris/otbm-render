@@ -4,4 +4,4 @@ import { writeFileSync } from "fs"
 import { read, serialize, write } from "otbm2json"
 const data = read("./public/Untitled.otbm")
 
-writeFileSync("Untitled.json", JSON.stringify(data))
+writeFileSync("./public/Untitled.json", JSON.stringify(data))

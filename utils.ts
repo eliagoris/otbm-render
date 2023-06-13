@@ -3,7 +3,7 @@ import { FrameGroupType } from "./modules/constants/const"
 import { ImageGenerator } from "./modules/imageGenerator/imageGenerator"
 import { OtbManager } from "./modules/otbFile/otbManager"
 import { DatManager } from "./modules/datFile/datManager"
-let untitled = require("./Untitled.json")
+import untitled from "./public/Untitled.json"
 
 const tileSize = 32
 
@@ -29,7 +29,7 @@ export function renderMap(
   features.forEach((feature) => {
     // type 4 are tiles and items
     if (feature.type === 4) {
-      feature.tiles.forEach((tile) => {
+      feature.tiles?.forEach((tile) => {
         if (tile.type === 5) {
           tiles.push(tile)
         }
