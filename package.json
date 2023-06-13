@@ -1,0 +1,37 @@
+{
+  "name": "open-tibia-library",
+  "version": "0.1.6",
+  "description": "OpenTibiaLibrary",
+  "scripts": {
+    "build-render": "esbuild otbmrender.ts --bundle --outfile=js/index.js --platform=browser",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js",
+    "watch": "webpack --config webpack.config.js --watch"
+  },
+  "author": "Gesior.pl (Jerzy Skalski)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gesior/open-tibia-library.git"
+  },
+  "devDependencies": {
+    "@types/jszip": "*",
+    "@types/node": "*",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.0",
+    "babel-polyfill": "^6.3.0",
+    "babel-preset-env": "^1.7.0",
+    "copy-webpack-plugin": "^4.0",
+    "esbuild": "^0.18.2",
+    "path": "*",
+    "ts-loader": "^3.0",
+    "typescript": "^2.6",
+    "webpack": "^3.12",
+    "webpack-cli": "^3.3"
+  },
+  "dependencies": {
+    "gif.js": "^0.2.0",
+    "jszip": "^3.2.2",
+    "pixi.js": "^7.2.4"
+  }
+}

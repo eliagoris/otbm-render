@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "es6",
+    "target": "es6",
+    "sourceMap": true,
+    "moduleResolution": "nodenext",
+    "allowSyntheticDefaultImports": true,
+    "types" : ["node", "jszip"]
+  }
+}
