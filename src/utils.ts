@@ -4,14 +4,16 @@ import { ImageGenerator } from "../lib/imageGenerator/imageGenerator"
 import { OtbManager } from "../lib/otbFile/otbManager"
 import { DatManager } from "../lib/datFile/datManager"
 import untitled from "../public/Untitled.json"
+import { SpriteManager } from "../lib/sprFile/spriteManager"
+import { DatThingType } from "../lib/datFile/datThingType"
 
 const tileSize = 32
 
 export function renderMap(
-  tilesContainer,
-  itemsContainer,
+  tilesContainer: PIXI.Container,
+  itemsContainer: PIXI.Container,
   datManager: DatManager,
-  spriteManager,
+  spriteManager: SpriteManager,
   otbManager: OtbManager,
   generator: ImageGenerator
 ) {
@@ -37,6 +39,31 @@ export function renderMap(
     }
   })
 
+  const gridSizeX = Math.ceil(json.data.mapWidth)
+  const gridSizeY = Math.ceil(json.data.mapHeight)
+  // the rendered map
+  const map: {
+    tile: {
+      sprite: PIXI.Sprite
+      itemThing: DatThingType
+      tileid: number
+      x: number
+      y: number
+    }
+    items?: {
+      sprite: PIXI.Sprite
+      itemThing: DatThingType
+    }[]
+  }[][] = new Array(gridSizeX)
+
+  for (let i = 0; i < gridSizeX; i++) {
+    map[i] = new Array(gridSizeY)
+  }
+
+  const items: {
+    sprite: PIXI.Sprite
+    itemThing: DatThingType
+  }[] = []
   tiles.forEach((tile) => {
     const tileClientId = otbManager.getItem(tile.tileid).getClientId()
     // get data from '.dat' about that item
@@ -59,6 +86,15 @@ export function renderMap(
 
     // Add the sprite to the tilesContainer
     tilesContainer.addChild(sprite)
+    map[tile.x][tile.y] = {
+      tile: {
+        sprite,
+        itemThing: tileThingType,
+        tileid: tile.tileid,
+        x: tile.x,
+        y: tile.y,
+      },
+    }
 
     if (tile.items) {
       tile.items.forEach((item) => {
@@ -74,6 +110,7 @@ export function renderMap(
 
           const itemThing = datManager.getItem(item.id)
           console.log(itemThing.isNotWalkable())
+
           // const itemThingType = datManager.getItem(item.id)
           const pixiSprite = new PIXI.Sprite(
             PIXI.Texture.fromBuffer(
@@ -90,11 +127,28 @@ export function renderMap(
           )
           pixiSprite.zIndex = 10
 
+          if (itemThing.isNotWalkable()) {
+            pixiSprite.alpha = 0.5
+          }
+
           itemsContainer.addChild(pixiSprite)
+          items.push({
+            sprite: pixiSprite,
+            itemThing,
+          })
+
+          if (!map[tile.x][tile.y].items) {
+            map[tile.x][tile.y].items = []
+          }
+
+          map[tile.x][tile.y].items?.push({
+            sprite: pixiSprite,
+            itemThing,
+          })
         }
       })
     }
   })
 
-  return { mapJson: untitled }
+  return { mapJson: untitled, map, items }
 }

@@ -32,8 +32,8 @@ async function testLoadFromUrlsAndDrawImage() {
 
   // Create a PIXI Application
   const app = new PIXI.Application<HTMLCanvasElement>({
-    width: 1080,
-    height: 720,
+    width: window.innerWidth,
+    height: window.innerHeight,
     backgroundColor: 0x000000,
     antialias: true,
   })
@@ -64,7 +64,7 @@ async function testLoadFromUrlsAndDrawImage() {
     otbManager
   )
 
-  const { mapJson } = renderMap(
+  const { mapJson, map } = renderMap(
     tilesContainer,
     itemsContainer,
     datManager,
@@ -85,7 +85,7 @@ async function testLoadFromUrlsAndDrawImage() {
   }
 
   const outfitSprites: { sprite: Sprite }[] =
-    imageGenerator.generateOutfitAnimationImages(1)
+    imageGenerator.generateOutfitAnimationImages(1) || []
 
   const [top1, , , right1, , , bottom1, , , left1, , ,] = outfitSprites
 
@@ -129,9 +129,35 @@ async function testLoadFromUrlsAndDrawImage() {
       spriteToUpdate = left1.sprite
     }
 
+    const targetX = characterSprite.x + dx * speed
+    const targetY = characterSprite.y + dy * speed
+
+    const targetCellX = Math.floor(targetX / tileSize)
+    const tagetCellY = Math.floor(targetY / tileSize)
+
+    const targetMapCell = map[targetCellX][tagetCellY]
+
+    // that means there is no tile in the target cell (empty space)
+    if (!targetMapCell) {
+      return true
+    }
+
+    // check for items, such as not walkable items
+    const items = targetMapCell.items
+    if (items) {
+      const isThereNotWalkable = items.some((item) =>
+        item.itemThing.isNotWalkable()
+      )
+
+      // prevent character from walking on not walkable items
+      if (isThereNotWalkable) {
+        return true
+      }
+    }
+
     // Move the character sprite
-    characterSprite.x += dx * speed
-    characterSprite.y += dy * speed
+    characterSprite.x = targetX
+    characterSprite.y = targetY
 
     // Update the character sprite texture
     const texture = PIXI.Texture.fromBuffer(
@@ -155,32 +181,25 @@ async function testLoadFromUrlsAndDrawImage() {
   // Update the camera position based on the keyboard input
   function handleKeyboardInput() {
     const speed = 32
-    const keys = {
-      KeyW: false,
-      KeyA: false,
-      KeyS: false,
-      KeyD: false,
-    }
-    function keydownHandler(event) {
-      keys[event.code] = true
 
-      if (keys.KeyW) {
-        updateCharacterPosition("top", speed)
-      } else if (keys.KeyA) {
-        updateCharacterPosition("left", speed)
-      } else if (keys.KeyS) {
-        updateCharacterPosition("bottom", speed)
-      } else if (keys.KeyD) {
-        updateCharacterPosition("right", speed)
+    function keydownHandler(event) {
+      switch (event.code) {
+        case "KeyW":
+          updateCharacterPosition("top", speed)
+          break
+        case "KeyA":
+          updateCharacterPosition("left", speed)
+          break
+        case "KeyS":
+          updateCharacterPosition("bottom", speed)
+          break
+        case "KeyD":
+          updateCharacterPosition("right", speed)
+          break
       }
     }
 
-    function keyupHandler(event) {
-      keys[event.code] = false
-    }
-
     document.addEventListener("keydown", keydownHandler)
-    document.addEventListener("keyup", keyupHandler)
   }
 
   // Call the function to handle keyboard input and update the camera
