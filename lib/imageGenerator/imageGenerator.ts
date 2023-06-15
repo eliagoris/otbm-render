@@ -333,7 +333,6 @@ export class ImageGenerator {
                 for (let x = 0; x < frameGroup.m_numPatternX; ++x) {
                     for (let l = 0; l < frameGroup.m_layers; ++l) {
                         for (let a = 0; a < frameGroup.m_animationPhases; ++a) {
-                            console.log('generate', 'outfits_anim/' + outfitId + '/' + (a + 1) + '/' + (z + 1) + '/' + (y + 1) + '/' + (x + 1))
                             const outfitSprite = new Sprite(new Size(SpriteManager.SPRITE_SIZE * frameGroup.m_size.width(), SpriteManager.SPRITE_SIZE * frameGroup.m_size.height()));
                             for (let w = 0; w < frameGroup.m_size.width(); ++w) {
                                 for (let h = 0; h < frameGroup.m_size.height(); ++h) {

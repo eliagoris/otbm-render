@@ -24,7 +24,7 @@ export function renderMap(
     type: number
     x: number
     y: number
-    tileid: number
+    tileid?: number
     items?: { type: number; id: number }[]
   }[] = []
 
@@ -43,12 +43,12 @@ export function renderMap(
   const gridSizeY = Math.ceil(json.data.mapHeight)
   // the rendered map
   const map: {
-    tile: {
+    x: number
+    y: number
+    tile?: {
       sprite: PIXI.Sprite
       itemThing: DatThingType
       tileid: number
-      x: number
-      y: number
     }
     items?: {
       sprite: PIXI.Sprite
@@ -65,35 +65,34 @@ export function renderMap(
     itemThing: DatThingType
   }[] = []
   tiles.forEach((tile) => {
-    const tileClientId = otbManager.getItem(tile.tileid).getClientId()
-    // get data from '.dat' about that item
-    const tileThingType = datManager.getItem(tileClientId)
-    // get first sprite [image] of that item
-    const firstThingTypeImage = tileThingType
-      .getFrameGroup(FrameGroupType.FrameGroupIdle)
-      .getSprite(0)
+    // sometimes there is no tileid, only items. for example, a wall in an empty space.
+    if (tile.tileid) {
+      const tileClientId = otbManager.getItem(tile.tileid).getClientId()
+      // get data from '.dat' about that item
+      const tileThingType = datManager.getItem(tileClientId)
+      // get first sprite [image] of that item
+      const firstThingTypeImage = tileThingType
+        .getFrameGroup(FrameGroupType.FrameGroupIdle)
+        .getSprite(0)
 
-    const firstImagePixelsData = spriteManager.getSprite(firstThingTypeImage)
+      const firstImagePixelsData = spriteManager.getSprite(firstThingTypeImage)
 
-    const sprite = new PIXI.Sprite(
-      PIXI.Texture.fromBuffer(
-        new Uint8Array(firstImagePixelsData.getPixels().m_buffer.buffer),
-        32,
-        32
+      const sprite = new PIXI.Sprite(
+        PIXI.Texture.fromBuffer(
+          new Uint8Array(firstImagePixelsData.getPixels().m_buffer.buffer),
+          32,
+          32
+        )
       )
-    )
-    sprite.position.set(tile.x * tileSize, tile.y * tileSize)
+      sprite.position.set(tile.x * tileSize, tile.y * tileSize)
 
-    // Add the sprite to the tilesContainer
-    tilesContainer.addChild(sprite)
+      // Add the sprite to the tilesContainer
+      tilesContainer.addChild(sprite)
+    }
+
     map[tile.x][tile.y] = {
-      tile: {
-        sprite,
-        itemThing: tileThingType,
-        tileid: tile.tileid,
-        x: tile.x,
-        y: tile.y,
-      },
+      x: tile.x,
+      y: tile.y,
     }
 
     if (tile.items) {
@@ -125,11 +124,6 @@ export function renderMap(
             tile.x * tileSize - (itemSprite.getWidth() === 64 ? 32 : 0),
             tile.y * tileSize - (itemSprite.getWidth() === 64 ? 32 : 0)
           )
-          pixiSprite.zIndex = 10
-
-          if (itemThing.isNotWalkable()) {
-            pixiSprite.alpha = 0.5
-          }
 
           itemsContainer.addChild(pixiSprite)
           items.push({
