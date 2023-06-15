@@ -3325,7 +3325,7 @@
     }
   });
 
-  // modules/constants/const.ts
+  // lib/constants/const.ts
   var DatThingAttr = /* @__PURE__ */ ((DatThingAttr2) => {
     DatThingAttr2[DatThingAttr2["ThingAttrGround"] = 0] = "ThingAttrGround";
     DatThingAttr2[DatThingAttr2["ThingAttrGroundBorder"] = 1] = "ThingAttrGroundBorder";
@@ -3375,7 +3375,7 @@
     return DatThingAttr2;
   })(DatThingAttr || {});
 
-  // modules/client.ts
+  // lib/client.ts
   var Client = class {
     m_clientVersion = 0;
     m_features = [];
@@ -3529,7 +3529,7 @@
     }
   };
 
-  // modules/log.ts
+  // lib/log.ts
   var error = function(...v2) {
     console.error.apply(this, v2);
   };
@@ -3543,7 +3543,7 @@
     }
   };
 
-  // modules/datFile/animator.ts
+  // lib/datFile/animator.ts
   var Animator = class {
     m_animationPhases = 0;
     m_startPhase = 0;
@@ -3572,7 +3572,7 @@
     }
   };
 
-  // modules/structures/color.ts
+  // lib/structures/color.ts
   var _Color = class {
     m_r;
     m_g;
@@ -3672,7 +3672,7 @@
   __publicField(Color, "blue", 4294901760);
   __publicField(Color, "yellow", 4278255615);
 
-  // modules/datFile/datThingTypeAttributes.ts
+  // lib/datFile/datThingTypeAttributes.ts
   var DatThingTypeAttributes = class {
     attribs = {};
     has(attr) {
@@ -3689,7 +3689,7 @@
     }
   };
 
-  // modules/structures/point.ts
+  // lib/structures/point.ts
   var Point = class {
     constructor(x2 = 0, y2 = 0) {
       this.x = x2;
@@ -3712,7 +3712,7 @@
     }
   };
 
-  // modules/structures/size.ts
+  // lib/structures/size.ts
   var Size = class {
     constructor(wd = -1, ht = -1) {
       this.wd = wd;
@@ -3769,7 +3769,7 @@
     }
   };
 
-  // modules/structures/marketData.ts
+  // lib/structures/marketData.ts
   var MarketData = class {
     name;
     category;
@@ -3779,7 +3779,7 @@
     tradeAs;
   };
 
-  // modules/structures/light.ts
+  // lib/structures/light.ts
   var Light = class {
     constructor(intensity = 0, color = 215) {
       this.intensity = intensity;
@@ -3787,7 +3787,7 @@
     }
   };
 
-  // modules/datFile/frameGroup.ts
+  // lib/datFile/frameGroup.ts
   var FrameGroup = class {
     m_size = new Size();
     m_animator = null;
@@ -3847,7 +3847,7 @@
     }
   };
 
-  // modules/structures/bonesData.ts
+  // lib/structures/bonesData.ts
   var BonesData = class {
     north_x;
     north_y;
@@ -3859,7 +3859,7 @@
     west_y;
   };
 
-  // modules/datFile/datThingType.ts
+  // lib/datFile/datThingType.ts
   var DatThingType = class {
     m_category;
     m_id = 0;
@@ -4285,7 +4285,7 @@
   };
   __publicField(DatThingType, "maskColors", [Color.red, Color.green, Color.blue, Color.yellow]);
 
-  // modules/structures/position.ts
+  // lib/structures/position.ts
   var Position = class {
     constructor(x2 = 0, y2 = 0, z = 0) {
       this.x = x2;
@@ -4294,7 +4294,7 @@
     }
   };
 
-  // modules/sprFile/pixel.ts
+  // lib/sprFile/pixel.ts
   var Pixel = class {
     constructor(_r, _g, _b, _a) {
       this._r = _r;
@@ -4332,7 +4332,7 @@
   };
   __publicField(Pixel, "BYTES_PER_PIXEL", 4);
 
-  // modules/fileHandlers/dataBuffer.ts
+  // lib/fileHandlers/dataBuffer.ts
   var DataBuffer = class {
     constructor(m_capacity = 64) {
       this.m_capacity = m_capacity;
@@ -4509,7 +4509,7 @@
     }
   };
 
-  // modules/fileHandlers/binaryTree.ts
+  // lib/fileHandlers/binaryTree.ts
   var _BinaryTree = class {
     constructor(m_fin) {
       this.m_fin = m_fin;
@@ -4635,7 +4635,7 @@
   __publicField(BinaryTree, "BINARYTREE_NODE_START", 254);
   __publicField(BinaryTree, "BINARYTREE_NODE_END", 255);
 
-  // modules/fileHandlers/fileStream.ts
+  // lib/fileHandlers/fileStream.ts
   var FileStream = class {
     data;
     offset;
@@ -4729,7 +4729,7 @@
     }
   };
 
-  // modules/fileHandlers/inputFile.ts
+  // lib/fileHandlers/inputFile.ts
   var InputFile = class extends FileStream {
     constructor(msg) {
       super();
@@ -4741,7 +4741,7 @@
     }
   };
 
-  // modules/resources.ts
+  // lib/resources.ts
   var Resources = class {
     async openUrl(url2) {
       let get = async function(url3) {
@@ -4773,7 +4773,7 @@
   };
   var g_resources = new Resources();
 
-  // modules/fileHandlers/outputFile.ts
+  // lib/fileHandlers/outputFile.ts
   var OutputFile = class extends FileStream {
     constructor() {
       super();
@@ -4809,7 +4809,7 @@
     }
   };
 
-  // modules/constants/helpers.ts
+  // lib/constants/helpers.ts
   var toInt = (int) => {
     return parseInt(int.toString());
   };
@@ -4824,7 +4824,7 @@
     }, {});
   };
 
-  // modules/datFile/datManager.ts
+  // lib/datFile/datManager.ts
   var _DatManager = class {
     constructor(m_client) {
       this.m_client = m_client;
@@ -4983,7 +4983,7 @@
   var DatManager = _DatManager;
   __publicField(DatManager, "m_nullThingType", new DatThingType());
 
-  // modules/otbFile/otbItemTypeAttributes.ts
+  // lib/otbFile/otbItemTypeAttributes.ts
   var OtbItemTypeAttributes = class {
     attribs = {};
     has(attr) {
@@ -5000,7 +5000,7 @@
     }
   };
 
-  // modules/otbFile/otbItemType.ts
+  // lib/otbFile/otbItemType.ts
   var OtbItemType = class {
     m_null = true;
     m_category = 0 /* ItemCategoryInvalid */;
@@ -5219,7 +5219,7 @@
     }
   };
 
-  // modules/fileHandlers/outputBinaryTree.ts
+  // lib/fileHandlers/outputBinaryTree.ts
   var OutputBinaryTree = class extends BinaryTree {
     constructor(m_fin) {
       super(m_fin);
@@ -5290,7 +5290,7 @@
   __publicField(OutputBinaryTree, "BINARYTREE_NODE_START", 254);
   __publicField(OutputBinaryTree, "BINARYTREE_NODE_END", 255);
 
-  // modules/otbFile/otbManager.ts
+  // lib/otbFile/otbManager.ts
   var OtbManager = class {
     constructor(m_client) {
       this.m_client = m_client;
@@ -5427,7 +5427,7 @@
     }
   };
 
-  // modules/sprFile/sprite.ts
+  // lib/sprFile/sprite.ts
   var Sprite = class {
     m_size;
     m_pixels;
@@ -5549,7 +5549,7 @@
     }
   };
 
-  // modules/sprFile/spriteManager.ts
+  // lib/sprFile/spriteManager.ts
   var _SpriteManager = class {
     constructor(m_client) {
       this.m_client = m_client;
@@ -5624,7 +5624,7 @@
   __publicField(SpriteManager, "SPRITE_SIZE", 32);
   __publicField(SpriteManager, "SPRITE_DATA_SIZE", _SpriteManager.SPRITE_SIZE * _SpriteManager.SPRITE_SIZE * 4);
 
-  // modules/imageGenerator/imageGenerator.ts
+  // lib/imageGenerator/imageGenerator.ts
   var ImageGenerator = class {
     constructor(datManager = null, sprManager = null, otbManager = null) {
       this.datManager = datManager;
@@ -28469,7 +28469,7 @@ ${e2}`);
   // public/Untitled.json
   var Untitled_default = { version: "1.0.1", identifier: 0, data: { type: 0, version: 2, mapWidth: 256, mapHeight: 256, itemsMajorVersion: 3, itemsMinorVersion: 55, nodes: [{ type: 2, description: "Saved with Remere's Map Editor 3.6 No map description available.", spawnfile: "Untitled-spawn.xml", housefile: "Untitled-house.xml", features: [{ type: 4, x: 0, y: 0, z: 7, tiles: [{ type: 5, x: 118, y: 124, tileid: 103 }, { type: 5, x: 118, y: 125, tileid: 101 }, { type: 5, x: 118, y: 126, tileid: 101, items: [{ type: 6, id: 2108 }] }, { type: 5, x: 118, y: 127, tileid: 101 }, { type: 5, x: 119, y: 124, tileid: 101 }, { type: 5, x: 119, y: 125, tileid: 101 }, { type: 5, x: 119, y: 126, tileid: 105 }, { type: 5, x: 119, y: 127, tileid: 101 }, { type: 5, x: 120, y: 124, tileid: 101 }, { type: 5, x: 120, y: 125, tileid: 101, items: [{ type: 6, id: 1905 }] }, { type: 5, x: 120, y: 126, tileid: 159, items: [{ type: 6, id: 215 }, { type: 6, id: 225 }] }, { type: 5, x: 120, y: 127, tileid: 101 }, { type: 5, x: 121, y: 124, tileid: 101, items: [{ type: 6, id: 571 }] }, { type: 5, x: 121, y: 125, tileid: 159, items: [{ type: 6, id: 223 }] }, { type: 5, x: 121, y: 126, tileid: 160, items: [{ type: 6, id: 221 }, { type: 6, id: 219 }] }, { type: 5, x: 121, y: 127, tileid: 161, items: [{ type: 6, id: 225 }] }, { type: 5, x: 122, y: 124, tileid: 101, items: [{ type: 6, id: 571 }] }, { type: 5, x: 122, y: 125, tileid: 160, items: [{ type: 6, id: 224 }, { type: 6, id: 1159 }] }, { type: 5, x: 122, y: 126, tileid: 159, items: [{ type: 6, id: 220 }] }, { type: 5, x: 122, y: 127, tileid: 159, items: [{ type: 6, id: 221 }, { type: 6, id: 217 }] }, { type: 5, x: 123, y: 124, tileid: 105, items: [{ type: 6, id: 1178 }] }, { type: 5, x: 123, y: 125, tileid: 101 }, { type: 5, x: 123, y: 126, tileid: 160, items: [{ type: 6, id: 216 }, { type: 6, id: 224 }] }, { type: 5, x: 123, y: 127, tileid: 159, items: [{ type: 6, id: 216 }, { type: 6, id: 226 }] }, { type: 5, x: 124, y: 124, tileid: 101 }, { type: 5, x: 124, y: 125, tileid: 103 }, { type: 5, x: 124, y: 126, tileid: 101 }, { type: 5, x: 124, y: 127, tileid: 101 }, { type: 5, x: 125, y: 124, tileid: 101 }, { type: 5, x: 125, y: 125, tileid: 101 }, { type: 5, x: 125, y: 126, tileid: 101 }, { type: 5, x: 125, y: 127, tileid: 103 }, { type: 5, x: 126, y: 124, tileid: 101 }, { type: 5, x: 126, y: 125, tileid: 104 }, { type: 5, x: 126, y: 126, tileid: 101 }, { type: 5, x: 126, y: 127, tileid: 101 }, { type: 5, x: 127, y: 124, tileid: 101 }, { type: 5, x: 127, y: 125, tileid: 101 }, { type: 5, x: 127, y: 126, tileid: 101 }, { type: 5, x: 127, y: 127, tileid: 105 }, { type: 5, x: 118, y: 128, tileid: 101 }, { type: 5, x: 118, y: 129, tileid: 101 }, { type: 5, x: 119, y: 128, tileid: 103 }, { type: 5, x: 119, y: 129, tileid: 101 }, { type: 5, x: 120, y: 128, tileid: 101, items: [{ type: 6, id: 1189 }, { type: 6, id: 1088 }] }, { type: 5, x: 120, y: 129, tileid: 101, items: [{ type: 6, id: 1191 }] }, { type: 5, x: 121, y: 128, tileid: 101, items: [{ type: 6, id: 1190 }] }, { type: 5, x: 121, y: 129, tileid: 101, items: [{ type: 6, id: 1192 }] }, { type: 5, x: 122, y: 128, tileid: 101 }, { type: 5, x: 122, y: 129, tileid: 101 }, { type: 5, x: 123, y: 128, tileid: 104 }, { type: 5, x: 123, y: 129, tileid: 101 }, { type: 5, x: 124, y: 128, tileid: 101 }, { type: 5, x: 124, y: 129, tileid: 101 }, { type: 5, x: 125, y: 128, tileid: 101 }, { type: 5, x: 125, y: 129, tileid: 101 }, { type: 5, x: 126, y: 128, tileid: 101 }, { type: 5, x: 126, y: 129, tileid: 101 }, { type: 5, x: 127, y: 128, tileid: 102 }, { type: 5, x: 127, y: 129, tileid: 101 }] }, { type: 12 }, { type: 15 }] }] } };
 
-  // utils.ts
+  // src/utils.ts
   var tileSize = 32;
   function renderMap(tilesContainer, itemsContainer, datManager, spriteManager, otbManager, generator) {
     const json = Untitled_default;
@@ -28526,7 +28526,7 @@ ${e2}`);
     return { mapJson: Untitled_default };
   }
 
-  // otbmrender.ts
+  // src/otbmrender.ts
   async function testLoadFromUrlsAndDrawImage() {
     const client = new Client();
     client.setClientVersion(1041);

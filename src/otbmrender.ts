@@ -1,10 +1,10 @@
-import { Client } from "./modules/client"
-import { DatManager } from "./modules/datFile/datManager"
-import { OtbManager } from "./modules/otbFile/otbManager"
-import { SpriteManager } from "./modules/sprFile/spriteManager"
-import { ImageGenerator } from "./modules/imageGenerator/imageGenerator"
+import { Client } from "../lib/client"
+import { DatManager } from "../lib/datFile/datManager"
+import { OtbManager } from "../lib/otbFile/otbManager"
+import { SpriteManager } from "../lib/sprFile/spriteManager"
+import { ImageGenerator } from "../lib/imageGenerator/imageGenerator"
 import * as PIXI from "pixi.js"
-import { Sprite } from "./modules/sprFile/sprite"
+import { Sprite } from "../lib/sprFile/sprite"
 import { renderMap } from "./utils"
 
 async function testLoadFromUrlsAndDrawImage() {

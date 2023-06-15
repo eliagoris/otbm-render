@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "serve public -p 4000 --cors",
-    "build": "ts-node otbm2json.ts && esbuild otbmrender.ts --bundle --outfile=public/dist/index.js --platform=browser"
+    "build": "ts-node otbm2json.ts && esbuild src/otbmrender.ts --bundle --outfile=public/dist/index.js --platform=browser"
   },
   "devDependencies": {
     "@types/jszip": "*",

@@ -1,9 +1,9 @@
 import * as PIXI from "pixi.js"
-import { FrameGroupType } from "./modules/constants/const"
-import { ImageGenerator } from "./modules/imageGenerator/imageGenerator"
-import { OtbManager } from "./modules/otbFile/otbManager"
-import { DatManager } from "./modules/datFile/datManager"
-import untitled from "./public/Untitled.json"
+import { FrameGroupType } from "../lib/constants/const"
+import { ImageGenerator } from "../lib/imageGenerator/imageGenerator"
+import { OtbManager } from "../lib/otbFile/otbManager"
+import { DatManager } from "../lib/datFile/datManager"
+import untitled from "../public/Untitled.json"
 
 const tileSize = 32
 
