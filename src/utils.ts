@@ -1,11 +1,11 @@
 import * as PIXI from "pixi.js"
-import { FrameGroupType } from "../lib/constants/const"
-import { ImageGenerator } from "../lib/imageGenerator/imageGenerator"
-import { OtbManager } from "../lib/otbFile/otbManager"
-import { DatManager } from "../lib/datFile/datManager"
+import { FrameGroupType } from "open-tibia-library/dist/constants/const"
+import { ImageGenerator } from "open-tibia-library/dist/imageGenerator/imageGenerator"
+import { OtbManager } from "open-tibia-library/dist/otbFile/otbManager"
+import { DatManager } from "open-tibia-library/dist/datFile/datManager"
 import untitled from "../public/Untitled.json"
-import { SpriteManager } from "../lib/sprFile/spriteManager"
-import { DatThingType } from "../lib/datFile/datThingType"
+import { SpriteManager } from "open-tibia-library/dist/sprFile/spriteManager"
+import { DatThingType } from "open-tibia-library/dist/datFile/datThingType"
 
 const tileSize = 32
 

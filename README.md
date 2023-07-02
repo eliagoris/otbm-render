@@ -1,9 +1,20 @@
-# otbm render
+# otbm-render
 
-A project to render a Remeres map in the browser
+Render a Remeres map in the browser.
 
-- Reads a `.otbm` file (Remeres map) in JSON format using otbm2json
-- Writes to a JSON file (this can be skipped, use only JSON variables later) - TODO
-- Uses open-tibia-library to read the `.dat` and `.spr` files
-- Load the proper sprite from the `.spr` file for each map item
-- Renders the map using pixi.js
+What is happening in this project:
+
+- Reads your `.otbm` file (Remeres map).
+- Reads your `.dat`, `.spr`, & `.otb` files.
+- Loops through the entire map and renders item sprites using pixi.js.
+
+_In a nutshell, you can create your game using Remeres, Open Tibia tools, and sprites; and by using this project, you can develop & deploy your game to the web browser. This project is barebones and is meant to be further developed._
+
+Thanks to the Open Tibia community for making this possible. Especially the [open-tibia-library](https://github.com/gesior/open-tibia-library), [otbm2json](https://github.com/Inconcessus/OTBM2JSON), [open_tibia_sprite_pack](https://github.com/peonso/opentibia_sprite_pack), & [RME](https://github.com/hampusborgos/rme) authors.
+
+## develop
+
+- clone this repo
+- run `yarn`
+- run `yarn build`
+- run `yarn dev`

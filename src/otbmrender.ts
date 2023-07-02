@@ -1,10 +1,10 @@
-import { Client } from "../lib/client"
-import { DatManager } from "../lib/datFile/datManager"
-import { OtbManager } from "../lib/otbFile/otbManager"
-import { SpriteManager } from "../lib/sprFile/spriteManager"
-import { ImageGenerator } from "../lib/imageGenerator/imageGenerator"
+import { Client } from "open-tibia-library/dist/client"
+import { DatManager } from "open-tibia-library/dist/datFile/datManager"
+import { OtbManager } from "open-tibia-library/dist/otbFile/otbManager"
+import { SpriteManager } from "open-tibia-library/dist/sprFile/spriteManager"
+import { ImageGenerator } from "open-tibia-library/dist/imageGenerator/imageGenerator"
 import * as PIXI from "pixi.js"
-import { Sprite } from "../lib/sprFile/sprite"
+import { Sprite } from "open-tibia-library/dist/sprFile/sprite"
 import { renderMap } from "./utils"
 
 async function testLoadFromUrlsAndDrawImage() {
