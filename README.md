@@ -2,6 +2,9 @@
 
 Render a Remeres map in the browser.
 
+<img src="./screenshot.png" />
+
+<br />
 What is happening in this project:
 
 - Reads your `.otbm` file (Remeres map).
