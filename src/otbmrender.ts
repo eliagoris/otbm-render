@@ -14,7 +14,7 @@ async function testLoadFromUrlsAndDrawImage() {
   const serverUrl = "http://localhost:4000/"
 
   const datManager = new DatManager(client)
-  await datManager.loadDatFromUrl(serverUrl + "Tibia.dat").then((datLoaded) => {
+  await datManager.loadDatFromUrl(serverUrl + "game.dat").then((datLoaded) => {
     console.log("loaded dat", datLoaded)
   })
 
@@ -25,7 +25,7 @@ async function testLoadFromUrlsAndDrawImage() {
 
   const spriteManager = new SpriteManager(client)
   await spriteManager
-    .loadSprFromUrl(serverUrl + "Tibia.spr")
+    .loadSprFromUrl(serverUrl + "game.spr")
     .then((sprLoaded) => {
       console.log("loaded spr", sprLoaded)
     })
