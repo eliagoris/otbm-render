@@ -11,7 +11,8 @@ async function testLoadFromUrlsAndDrawImage() {
   const client = new Client()
   client.setClientVersion(1041)
 
-  const serverUrl = "http://localhost:4000/"
+  // const serverUrl = "http://localhost:4000/"
+  const serverUrl = "https://otbm-render.vercel.app/"
 
   const datManager = new DatManager(client)
   await datManager.loadDatFromUrl(serverUrl + "game.dat").then((datLoaded) => {
