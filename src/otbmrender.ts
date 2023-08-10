@@ -6,6 +6,10 @@ import { ImageGenerator } from "open-tibia-library/dist/imageGenerator/imageGene
 import * as PIXI from "pixi.js"
 import { Sprite } from "open-tibia-library/dist/sprFile/sprite"
 import { renderMap } from "./utils"
+import { Grid, AStarFinder } from "pathfinding"
+
+// Define a target point for the character to move towards
+let targetPoint: number[][] | null = null
 
 async function testLoadFromUrlsAndDrawImage() {
   const client = new Client()
@@ -73,6 +77,19 @@ async function testLoadFromUrlsAndDrawImage() {
     otbManager,
     imageGenerator
   )
+
+  const grid = new Grid(mapJson.data.mapWidth, mapJson.data.mapHeight)
+  for (let x = 0; x < mapJson.data.mapWidth; x++) {
+    for (let y = 0; y < mapJson.data.mapHeight; y++) {
+      const cell = map[x][y]
+      // Mark walkable cells as 0 and non-walkable cells as 1
+      grid.setWalkableAt(
+        x,
+        y,
+        !cell || !cell.items?.some((item) => item.itemThing.isNotWalkable())
+      )
+    }
+  }
 
   // Calculate the map width and height in pixels
   const mapWidthPixels = mapJson.data.mapWidth * tileSize
@@ -205,6 +222,101 @@ async function testLoadFromUrlsAndDrawImage() {
 
   // Call the function to handle keyboard input and update the camera
   handleKeyboardInput()
+
+  function handleMouseClick(event) {
+    const targetX =
+      camera.x + (event.clientX - app.screen.width / 2) / cameraViewport.scale.x
+    const targetY =
+      camera.y +
+      (event.clientY - app.screen.height / 2) / cameraViewport.scale.y
+
+    // Use pathfinding to find a path to the clicked point
+    const finder = new AStarFinder()
+    const startX = Math.floor(characterSprite.x / tileSize)
+    const startY = Math.floor(characterSprite.y / tileSize)
+    const endX = Math.floor(targetX / tileSize)
+    const endY = Math.floor(targetY / tileSize)
+    const path = finder.findPath(startX, startY, endX, endY, grid.clone())
+
+    if (path.length > 0) {
+      // Convert path to world coordinates
+      const newPath = path.map(([x, y]) => [x * tileSize, y * tileSize])
+
+      // Remove the current position from the path
+      newPath.shift()
+
+      // Set the path as the target points
+      targetPoint = newPath
+    } else {
+      targetPoint = null
+    }
+  }
+  // Add a mouse click event listener to the app's view
+  app.view.addEventListener("click", handleMouseClick)
+
+  function updateCharacterMovement() {
+    const speed = 2
+
+    if (targetPoint && targetPoint?.length > 0) {
+      const [targetX, targetY] = targetPoint[0]
+      const dx = targetX - characterSprite.x
+      const dy = targetY - characterSprite.y
+      const distance = Math.sqrt(dx * dx + dy * dy)
+
+      if (distance > speed) {
+        const vx = dx / distance
+        const vy = dy / distance
+
+        characterSprite.x += vx * speed
+        characterSprite.y += vy * speed
+        updateCharacterTextureAndCamera(vx, vy)
+      } else {
+        targetPoint?.shift()
+      }
+    }
+  }
+
+  // Function to update character sprite texture and camera position
+  function updateCharacterTextureAndCamera(vx, vy) {
+    // Update the character sprite texture
+    const spriteToUpdate = getCharacterSpriteBasedOnDirection(vx, vy)
+    const texture = PIXI.Texture.fromBuffer(
+      new Uint8Array(spriteToUpdate.getPixels().m_buffer.buffer),
+      spriteToUpdate.getWidth(),
+      spriteToUpdate.getHeight()
+    )
+    characterSprite.texture = texture
+
+    // Update the camera position to follow the character sprite
+    camera.x = characterSprite.x
+    camera.y = characterSprite.y
+
+    // Update the cameraViewport position for desired camera effect
+    cameraViewport.position.set(
+      app.screen.width / 2 - camera.x * cameraViewport.scale.x,
+      app.screen.height / 2 - camera.y * cameraViewport.scale.y
+    )
+  }
+
+  // Define a function to get the appropriate character sprite based on movement direction
+  function getCharacterSpriteBasedOnDirection(vx, vy) {
+    if (Math.abs(vx) > Math.abs(vy)) {
+      if (vx > 0) return right1.sprite
+      else return left1.sprite
+    } else {
+      if (vy > 0) return bottom1.sprite
+      else return top1.sprite
+    }
+  }
+
+  // Define the game loop to update character movement
+  function gameLoop() {
+    updateCharacterMovement()
+    requestAnimationFrame(gameLoop)
+  }
+
+  // Start the game loop
+  gameLoop()
 }
 
 testLoadFromUrlsAndDrawImage()

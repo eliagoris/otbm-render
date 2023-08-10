@@ -13,10 +13,12 @@
     "typescript": "^2.6"
   },
   "dependencies": {
+    "@types/pathfinding": "^0.0.6",
     "gif.js": "^0.2.0",
     "jszip": "^3.2.2",
     "open-tibia-library": "^0.1.18",
     "otbm2json": "^0.2.0",
+    "pathfinding": "^0.4.18",
     "pixi.js": "^7.2.4",
     "serve": "^14.2.0"
   }
