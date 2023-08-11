@@ -205,6 +205,40 @@ async function testLoadFromUrlsAndDrawImage() {
 
   // Call the function to handle keyboard input and update the camera
   handleKeyboardInput()
+
+  let startPos, lastPos, delta, isKeyDown
+  addEventListener('pointerdown', onDown)
+  addEventListener('pointermove', onMove)
+  addEventListener('pointerup', onUP)
+  addEventListener('wheel', onWheel)
+
+  function onDown(e) {
+      isKeyDown = true
+      startPos = { x: e.x, y: e.y }
+      lastPos = null
+  }
+  function onMove(e) {
+      if (!isKeyDown) return
+      if (!lastPos) {
+        delta = { x: startPos.x - e.x, y: startPos.y - e.y }
+      }
+      else {
+        delta = { x: e.x - lastPos.x, y: e.y - lastPos.y }
+      }
+      
+      lastPos = { x: e.x, y: e.y }
+      cameraViewport.x += delta.x
+      cameraViewport.y += delta.y
+  }
+  function onUP(e) {
+      isKeyDown = false
+  }
+  const scaleSpeed = 0.1
+  function onWheel(e) {
+    let s = cameraViewport.scale.x, tx = (e.x - cameraViewport.x) / s, ty = (e.y - cameraViewport.y) / s
+    s += -1 * Math.max(-1, Math.min(1, e.deltaY)) * scaleSpeed * s
+    cameraViewport.setTransform(-tx * s + e.x, -ty * s + e.y, s, s)
+  }
 }
 
 testLoadFromUrlsAndDrawImage()
